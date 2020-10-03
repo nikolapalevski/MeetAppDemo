@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="100dp"
+    android:paddingLeft="20dp"
+    tools:context=".SingleEventActivity">
+
+    <TextView
+        android:id="@+id/textLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Titleeeeee"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:ellipsize="end"
+        android:layout_centerHorizontal="true"
+
+        />
+
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_below="@id/textLocation"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/textTime"
+        android:text="Description"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/textGoingJustText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDate"
+        android:paddingTop="20dp"
+        android:text="Going:"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/textGoing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textGoingJustText"
+        android:text="Going"/>
+
+    <Button
+        android:id="@+id/buttonGoing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textGoing"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Going"
+        android:visibility="invisible"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/buttonNotGoing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textGoing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Not Going"
+        android:visibility="invisible"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonGoing"
+        android:layout_marginTop="20dp"
+        android:text="Update"
+        android:layout_marginLeft="85dp"
+        android:visibility="invisible"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonNotGoing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/buttonUpdate"
+        android:text="Delete"
+        android:visibility="invisible"
+        tools:visibility="invisible" />
+
+</RelativeLayout>

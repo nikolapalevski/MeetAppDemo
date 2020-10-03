@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1014397381734",
+    "firebase_url": "https://bogstrocieventdemo.firebaseio.com",
+    "project_id": "bogstrocieventdemo",
+    "storage_bucket": "bogstrocieventdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014397381734:android:5d2e0ddf7e754d1bbd11a7",
+        "android_client_info": {
+          "package_name": "com.example.bogstrocieventdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014397381734-0h8l8shlns876o42errvd3qtia2sgfu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfochmBcA5Dn0HsIqFzoo-hnuGSS2EGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014397381734-0h8l8shlns876o42errvd3qtia2sgfu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
