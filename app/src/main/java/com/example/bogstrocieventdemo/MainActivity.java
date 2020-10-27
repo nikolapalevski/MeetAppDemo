@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,36 +58,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void signUpClicked(View view){
-
-
-
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    private final String TAG = null;
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            //Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            logIn();
-                            //
-                            //updateUI(user);
-                        } else{
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-
-                    }
-                });
-
-
-
-    }
+//    public void signUpClicked(View view){
+//
+//
+//
+//
+//
+//        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    private final String TAG = null;
+//
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            //Log.d(TAG, "createUserWithEmail:success");
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            logIn();
+//                            //
+//                            //updateUI(user);
+//                        } else{
+//                            // If sign in fails, display a message to the user.
+//                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+//                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+//                            //updateUI(null);
+//                        }
+//
+//                    }
+//                });
+//
+//
+//
+//    }
 
 
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login = findViewById(R.id.loginButton);
+        login = findViewById(R.id.createAccButton);
         signUp = findViewById(R.id.signupButton);
         email = findViewById(R.id.emailEditText);
         password = findViewById(R.id.passwordEditText);
@@ -122,7 +122,12 @@ public class MainActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUpClicked(signUp);
+                //signUpClicked(signUp);
+
+                Intent newIntent = new Intent(MainActivity.this, NewAccountActivity.class);
+                startActivity(newIntent);
+                //finish();
+
             }
         });
 

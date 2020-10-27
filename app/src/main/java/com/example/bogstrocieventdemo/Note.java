@@ -1,19 +1,12 @@
 package com.example.bogstrocieventdemo;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Note {
     private String location;
     private String time;
     private String date;
     private String sender;
     private int priority;
-//    List<String> going;
-
-   // private ArrayList going;
 
     public Note(){
         //empty constractor
@@ -26,13 +19,7 @@ public class Note {
         this.date = date;
         this.sender = sender;
         this.priority = priority;
-        //this.going = going;
-
     }
-
-//    public List<String> getGoing() {
-//        return going;
-//    }
 
     public String getLocation() {
         return location;

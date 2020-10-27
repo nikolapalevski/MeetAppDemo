@@ -4,14 +4,12 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -24,11 +22,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.sql.DatabaseMetaData;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -52,10 +48,6 @@ public class ExampleDialog extends AppCompatDialogFragment {
 
         final LayoutInflater inflater = requireActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.example_dialog, null);
-
-        //final TimePicker vreme = (TimePicker) dialogView.findViewById(R.id.datePicker1);
-        //vreme.setIs24HourView(true);
-
         final Calendar myCalendar = Calendar.getInstance();
 
         final EditText datum = (EditText) dialogView.findViewById(R.id.datum);
@@ -133,8 +125,38 @@ public class ExampleDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                        final EditText editText = (EditText) dialogView.findViewById(R.id.inputLocation);
+                    }
+                })
+                //.setMessage("Create new event")
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ExampleDialog.this.getDialog().cancel();
+                    }
+                });
+        return  builder.create();
+    }
 
+//override na positive button za da bidat site polinja zadolzitelni za popoluvanje
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        final AlertDialog d = (AlertDialog)getDialog();
+        if(d != null)
+        {
+            Button positiveButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Boolean wantToCloseDialog = false;
+                    final EditText editText = (EditText) d.findViewById(R.id.inputLocation);
+                    final EditText datum = (EditText) d.findViewById(R.id.datum);
+                    final EditText vreme = (EditText) d.findViewById(R.id.vreme);
+                    Map<String, Object> data = new HashMap<>();
+//
                         //za lokacija
                         String lokacija = editText.getText().toString();
 
@@ -152,56 +174,39 @@ public class ExampleDialog extends AppCompatDialogFragment {
                         //timestamp
                         long tsLong = System.currentTimeMillis()/1000;
                         //String ts = Long.toString(tsLong);
-
-                        if(!lokacija.equals("") && !fullTime.equals("") && !finalenDatum.equals("")){
-
-
-                            Map<String, Object> data = new HashMap<>();
-                            data.put("location", lokacija);
-                            data.put("time", fullTime);
-                            data.put("date", finalenDatum);
-                            data.put("sender", email);
-                            data.put("dateCreated",tsLong);
-                            data.put("going", Arrays.asList(email) );
-
-                            db.collection("events")
-                                    .add(data)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            //Toast.makeText(getActivity(), "Vleze baba", Toast.LENGTH_SHORT).show();
-                                            //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            //Log.w(TAG, "Error adding document", e);
-                                            //Toast.makeText(getActivity(), "Error brat mi", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
-                            Toast.makeText(getActivity(), "Successfully added a new event!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "Fill all fields!", Toast.LENGTH_SHORT).show();
-                        }
-
-
-
-
-
+                    if(!lokacija.equals("") && !fullTime.equals("") && !finalenDatum.equals("")) {
+                        wantToCloseDialog = true;
                     }
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        ExampleDialog.this.getDialog().cancel();
-                    }
-                });
+                    if(wantToCloseDialog) {
 
-        return  builder.create();
+
+                        data.put("location", lokacija);
+                        data.put("time", fullTime);
+                        data.put("date", finalenDatum);
+                        data.put("sender", email);
+                        data.put("dateCreated", tsLong);
+                        data.put("going", Arrays.asList(email));
+
+                        db.collection("events")
+                                .add(data)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        //Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
+                        d.dismiss();
+                    }else
+                        Toast.makeText(getActivity(), "Must fill all fields!", Toast.LENGTH_SHORT).show();
+                        //else dialog stays open. Make sure you have an obvious way to close the dialog especially if you set cancellable to false.
+                }
+            });
+        }
     }
-
-
-
-
 }
