@@ -8,6 +8,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1014397381734:android:53701a5de0ee6a2fbd11a7",
+        "android_client_info": {
+          "package_name": "com.example.EventApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014397381734-h0en0bjsbrfmrogi2ph20kmboji6agru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.EventApp",
+            "certificate_hash": "7ebf3d020c147691e9fdf73b6c6a665d2f02e3b3"
+          }
+        },
+        {
+          "client_id": "1014397381734-0h8l8shlns876o42errvd3qtia2sgfu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfochmBcA5Dn0HsIqFzoo-hnuGSS2EGSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014397381734-0h8l8shlns876o42errvd3qtia2sgfu3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1014397381734-4tmmvu2o9ligu3g7ac8gi8tb1kh8fk45.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.andrejlotski.FlashChat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1014397381734:android:5d2e0ddf7e754d1bbd11a7",
         "android_client_info": {
           "package_name": "com.example.bogstrocieventdemo"
@@ -30,6 +74,13 @@
             {
               "client_id": "1014397381734-0h8l8shlns876o42errvd3qtia2sgfu3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1014397381734-4tmmvu2o9ligu3g7ac8gi8tb1kh8fk45.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.andrejlotski.FlashChat"
+              }
             }
           ]
         }

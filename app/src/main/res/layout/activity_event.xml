@@ -12,10 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -34,14 +30,21 @@
             android:layout_height="30dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_menu"
-            android:tint="@android:color/background_light" />
+            app:tint="@android:color/background_light" />
+        <ImageView
+            android:id="@+id/imageLogo"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/simplelogo" />
         
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="@string/app_name"
+            android:layout_marginStart="5dp"
+            android:text="MeetApp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -53,9 +56,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="90dp"
@@ -67,12 +68,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="36dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="50dp"
         android:clickable="true"
+        app:tint="@android:color/white"
         android:tint="@android:color/white"
+        app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:rippleColor="@color/colorAccent"
+        app:srcCompat="@drawable/ic_input_add_white"
+        android:contentDescription="@string/app_name" />
     
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -85,11 +91,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/colorAccent"
         app:headerLayout="@layout/layout_navigation_header"
         app:menu="@menu/navigation_menu"
-
         />
-
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

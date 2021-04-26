@@ -35,7 +35,6 @@ public class UpdateSingleEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_single_event);
 
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         final String location = getIntent().getStringExtra("location");
         final String time = getIntent().getStringExtra("time");
@@ -46,8 +45,6 @@ public class UpdateSingleEvent extends AppCompatActivity {
         final EditText editTextTime = findViewById(R.id.editViewTime);
         final EditText editTextDate = findViewById(R.id.editViewDate);
         final Button buttonUpdate = findViewById(R.id.buttonUpdate);
-
-
 
         editTextLocation.setText(location);
         editTextTime.setText(time);
@@ -117,9 +114,6 @@ public class UpdateSingleEvent extends AppCompatActivity {
         });
 
 
-
-
-
         final DocumentReference docRef = db.collection("events").document(id);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -133,14 +127,9 @@ public class UpdateSingleEvent extends AppCompatActivity {
                 String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
                         ? "Local" : "Server";
 
-
-
-
-
                 buttonUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
 
                        String lokacija = editTextLocation.getText().toString();
 
@@ -148,29 +137,18 @@ public class UpdateSingleEvent extends AppCompatActivity {
                         docRef.update("date", editTextDate.getText().toString());
                         docRef.update("time", editTextTime.getText().toString());
 
-
-                        Intent intent = new Intent(UpdateSingleEvent.this, EventActivity.class);
-                        startActivity(intent);
                         finish();
-
-
-
-
 
                     }
                 });
-
-
-
-
-
-
             }
         });
 
+    }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

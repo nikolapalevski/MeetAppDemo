@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -71,22 +74,9 @@ public class EventActivity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        progressDialog = new ProgressDialog(EventActivity.this);
-        progressDialog.setMessage("Loading..."); // Setting Message
-        //progressDialog.setTitle("ProgressDialog"); // Setting Title
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-        //progressDialog.show(); // Display Progress Dialog
-        progressDialog.setCancelable(false);
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                progressDialog.dismiss();
-            }
-        }).start();
+
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
 
         setContentView(R.layout.activity_event);
 
@@ -100,10 +90,10 @@ public class EventActivity extends AppCompatActivity implements NavigationView.O
         });
         setNavigationViewListener();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        NavigationView navigationView =  findViewById(R.id.navigationView);
         View headerView = navigationView.getHeaderView(0);
-        final TextView textProfile = (TextView) headerView.findViewById(R.id.textProfile);
-        final ImageView imageProfile = (ImageView) headerView.findViewById(R.id.imageProfile);
+        final TextView textProfile =  headerView.findViewById(R.id.textProfile);
+        final ImageView imageProfile =  headerView.findViewById(R.id.imageProfile);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         downloadRefUser = storageReference.child("images/"+ user.getEmail()+".jpg");
@@ -123,9 +113,10 @@ public class EventActivity extends AppCompatActivity implements NavigationView.O
                     imageProfile.setImageResource(R.drawable.gif);
                 }
             });
-        } catch (IOException e ) {}
+        } catch (IOException e ) {
+            Log.i("SingleEvent activity", String.valueOf(e));
+        }
         //postavuvanje ime i prezime na user vo navigation menu
-        assert user != null;
         DocumentReference docRef = db.collection("users").document(Objects.requireNonNull(user.getEmail()));
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -218,6 +209,12 @@ public class EventActivity extends AppCompatActivity implements NavigationView.O
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.startListening();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
@@ -271,8 +268,33 @@ public class EventActivity extends AppCompatActivity implements NavigationView.O
         return false;
     }
     private void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(EventActivity.this);
+        builder1.setMessage("Are you sure you want exit MeetApp?");
+        builder1.setCancelable(false);
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                        dialog.cancel();
+                    }
+                });
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
 }

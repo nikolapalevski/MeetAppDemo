@@ -186,6 +186,7 @@ public class ExampleDialog extends AppCompatDialogFragment {
                         data.put("sender", email);
                         data.put("dateCreated", tsLong);
                         data.put("going", Arrays.asList(email));
+                        data.put("comments",Arrays.asList());
 
                         db.collection("events")
                                 .add(data)
